@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+actor "Участник" as Participant
+actor "Организатор" as Organizer
+
+package "Система учета участников мероприятий" {
+  usecase "Регистрация в системе" as UC_Register
+  usecase "Просмотр мероприятий" as UC_ViewEvents
+  usecase "Регистрация на мероприятие" as UC_RegisterEvent
+  usecase "Отмена регистрации" as UC_CancelRegistration
+  usecase "Редактирование личных данных" as UC_EditProfile
+  
+  usecase "Управление мероприятиями" as UC_ManageEvents
+  usecase "Просмотр участников" as UC_ViewParticipants
+  usecase "Подтверждение регистраций" as UC_ConfirmRegistration
+  usecase "Изменение статуса участника" as UC_ChangeStatus
+  usecase "Формирование списков" as UC_GenerateLists
+  usecase "Отправка уведомлений" as UC_SendNotifications
+}
+
+' Связи участника
+Participant --> UC_Register
+Participant --> UC_ViewEvents
+Participant --> UC_RegisterEvent
+Participant --> UC_CancelRegistration
+Participant --> UC_EditProfile
+
+' Связи организатора
+Organizer --> UC_ManageEvents
+Organizer --> UC_ViewParticipants
+Organizer --> UC_ConfirmRegistration
+Organizer --> UC_ChangeStatus
+Organizer --> UC_GenerateLists
+Organizer --> UC_SendNotifications
+Organizer --> UC_ViewEvents
+Organizer --> UC_Register
+
+' Расширения и включения
+UC_ManageEvents .> UC_ViewEvents : extends
+UC_RegisterEvent .> UC_ViewEvents : includes
+UC_CancelRegistration .> UC_ViewEvents : includes
+
+@enduml
