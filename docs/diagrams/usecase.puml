@@ -1,7 +1,6 @@
 @startuml
 left to right direction
 skinparam packageStyle rectangle
-skinparam actorStyle awesome
 
 actor "Участник" as Participant
 actor "Организатор" as Organizer
